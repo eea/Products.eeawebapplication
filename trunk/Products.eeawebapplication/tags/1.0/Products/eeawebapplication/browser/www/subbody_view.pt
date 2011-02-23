@@ -1,8 +1,0 @@
-<metal:block use-macro="here/global_defines/macros/defines" />
-<div>
-   <metal:docview 
-       use-macro="context/@@body_macro"></metal:docview>
-
-    <div class="visualClear"><!-- --></div>
-
-</div>
