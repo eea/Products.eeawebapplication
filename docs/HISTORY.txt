@@ -1,0 +1,7 @@
+Changelog
+=========
+
+1.0-dev - (unreleased)
+------------------
+ * Change: eggified product [ichimdav #2931]
+
