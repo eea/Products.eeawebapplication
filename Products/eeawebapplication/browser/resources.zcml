@@ -1,0 +1,18 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five">
+
+     <browser:resource name="application.css"
+          file="www/application.css" />
+
+     <browser:resource name="shadow.png"
+          file="images/shadow-alpha.png" />
+
+     <browser:resource name="application.js"
+          file="www/application.js" />
+
+     <browser:resourceDirectory 
+          name="images"
+          directory="images" />
+
+</configure>

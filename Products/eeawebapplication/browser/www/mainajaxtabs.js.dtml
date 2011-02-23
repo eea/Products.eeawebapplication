@@ -1,0 +1,60 @@
+
+function showFlash(path, id) {
+  var so = new SWFObject(path + '/download', id, '100%', '100%', '8', '#ffffff');
+  so.addParam('scale', 'noscale');
+  so.write('container-'+id);
+}
+
+var ozone = 0;
+
+function tabFocusportaltab_map() {
+  newHeight = resizeDiv();
+  id = 'mapflash';
+  map = document.getElementById("container-"+id)
+
+  if(map != null) {   
+  map.style.height=newHeight + 'px';
+  map.style.width='100%';
+    if (ozone == 0) {
+       showFlash('&dtml-home;/map/'+id, id);
+       ozone = 1;  
+     }
+
+  }
+
+}
+
+var compare = 0;
+
+function tabFocusportaltab_compare() {
+  newHeight = resizeDiv();
+  id = 'comparison';
+  map = document.getElementById("container-" + id)
+  if(map != null) {   
+  map.style.height=newHeight + 'px';
+  map.style.width='100%';
+    if ( compare == 0){
+     showFlash('&dtml-home;/compare/'+id, id);
+     compare = 1;
+   }
+  }
+
+}
+
+
+var &dtml-tabVarId; = new AjaxTabs.Tabs( "<dtml-var tabListId>", "&dtml-tabPanelsId;");
+<dtml-var submenu missing="">
+
+function load&dtml-tabVarId;() {
+<dtml-in tabs mapping>
+     &dtml-tabVarId;.OpenTab("portaltab_&dtml-id;", "&dtml-title;", "&dtml-url;/body", false, "");
+</dtml-in>
+<dtml-in tabs mapping>
+  <dtml-if "id == getDefaultPageId()">
+     &dtml-tabVarId;.FocusTab("portaltab_&dtml-id;");
+  </dtml-if>
+</dtml-in>
+}
+
+AttachEvent(window,"load", load&dtml-tabVarId;, false);
+
