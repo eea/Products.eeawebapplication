@@ -29,7 +29,7 @@ import zope.component
 import re
 from zope.app.basicskin.standardmacros import Macros
 from Acquisition import aq_base, aq_inner, aq_parent
-from Globals import DTMLFile
+from App.special_dtml import DTMLFile
 
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName

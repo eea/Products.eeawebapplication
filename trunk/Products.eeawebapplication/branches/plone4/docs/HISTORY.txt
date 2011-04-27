@@ -3,6 +3,7 @@ Changelog
 
 1.1-dev - (2011-02-23)
 ----------------------
+ * Change: Plone 4 only versions of this package [ichimdav #4271]
 
 1.0-dev - (2011-02-23)
 ------------------

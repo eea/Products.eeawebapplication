@@ -5,7 +5,7 @@ from Products.CMFPlone import utils
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationPortlet
 from plone.app.layout.navigation.interfaces import INavtreeStrategy
-from Products.CMFPlone.browser.portlets.navigation import NavigationPortlet
+from plone.app.portlets.portlets import navigation
 from Products.eeawebapplication.interface import IEEAWebApplication
 from Products.CMFPlone.browser.navtree import DefaultNavtreeStrategy
 
@@ -18,7 +18,7 @@ def getApplicationRoot(obj):
             
     return obj
 
-class ApplicationNavigationPortlet(NavigationPortlet):
+class ApplicationNavigationPortlet(navigation.Renderer):
     """ EEA website can have IEEAWebApplication roots. """
     
     zope.interface.implements(INavigationPortlet)
