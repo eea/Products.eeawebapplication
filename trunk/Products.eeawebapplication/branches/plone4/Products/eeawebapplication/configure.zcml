@@ -4,7 +4,6 @@
 
   <include package=".browser" />
 
-  <include file="plone21.zcml" />
 
   <five:implements class="ZPublisher.HTTPRequest.HTTPRequest"
     interface="zope.publisher.interfaces.browser.IDefaultBrowserLayer"

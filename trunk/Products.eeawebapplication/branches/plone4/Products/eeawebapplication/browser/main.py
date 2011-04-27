@@ -34,14 +34,17 @@ from Globals import DTMLFile
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import utils as putils
-from Products.CMFPlone.browser.navtree import getNavigationRoot
 from Products.eeawebapplication.interface import IEEAWebApplication
+import logging
+
+logger = logging.getLogger('Products.eeawebapplication.browser.main')
+AjaxTabs = None
 try:
     from Products.ptabs.ajaxtabs.ajaxtabs import AjaxTabs
-except:
-    AjaxTabs = None
+except ImportError, err:
+    logger.info(err)
 
-from xml.sax import saxutils 
+#from xml.sax import saxutils 
 from interfaces import IWebAppView
 
 class StandardMacros(BrowserView, Macros):
@@ -55,13 +58,13 @@ def js_format(orig):
     formatted = ''
     for c in orig:
         if c == "\r":
-	    c = ''
-	elif c == "\n":
-	    c = "\\n"
+            c = ''
+        elif c == "\n":
+            c = "\\n"
         elif c == "'":
-	    c = "\\'"
+            c = "\\'"
         elif c == "?":
-	    c = "\\?"	    
+            c = "\\?"	    
         formatted += c
     return formatted
 
@@ -70,12 +73,12 @@ class Main(BrowserView):
     zope.interface.implements(IWebAppView)
 
     def _setCacheHeaders(self):
-	self.request.RESPONSE.setHeader('Cache-Control','max-age=0, s-maxage=3600, must-revalidate')
+        self.request.RESPONSE.setHeader('Cache-Control','max-age=0, s-maxage=3600, must-revalidate')
         
     def test(self, variable, trueValue, falseValue):
 
         if variable:
-	    return trueValue
+            return trueValue
         else:
             return falseValue
 
@@ -92,18 +95,18 @@ class Main(BrowserView):
             cssClass = 'plain'
             checkUrl = not currentUrl == self.home()
             if checkUrl and tab.getURL() in currentUrl:
-	        cssClass = 'selected'
-            tabId = tab.getId.replace('-','_')
-            cxId =  self.context.getId().replace('-','_')
+                cssClass = 'selected'
+                tabId = tab.getId.replace('-','_')
+                cxId =  self.context.getId().replace('-','_')
 	    
-	    onClick  = "javascript:tabs%s.OpenTab('subportaltab_%s','%s','%s/subbody', false, '');" % (cxId, tabId, js_format(tab.Title), tab.getURL())
-            menu.append( {'id': tab.getId,
-			  'tabId': tabId,
-	                  'title': tab.Title,
-		          'url': '%s' % tab.getURL(),
-		          'description': tab.Description,
-			  'class': cssClass,
-			  'onclick': onClick })
+                onClick  = "javascript:tabs%s.OpenTab('subportaltab_%s','%s','%s/subbody', false, '');" % (cxId, tabId, js_format(tab.Title), tab.getURL())
+                menu.append( {'id': tab.getId,
+                    'tabId': tabId,
+                    'title': tab.Title,
+                    'url': '%s' % tab.getURL(),
+                    'description': tab.Description,
+                    'class': cssClass,
+                    'onclick': onClick })
         return menu
 
     def getDefaultPageId(self):
@@ -127,11 +130,11 @@ class Main(BrowserView):
     
     def pages(self):
         catalog = getToolByName(self.context, 'portal_catalog')
-	obj = self._getRoot()
-	query = {}
-	query['path'] =  {'query' : '/'.join(obj.getPhysicalPath()),
-	                  'depth' : 1 }
-	query['portal_type'] = 'Folder'
+        obj = self._getRoot()
+        query = {}
+        query['path'] =  {'query' : '/'.join(obj.getPhysicalPath()),
+                     'depth' : 1 }
+        query['portal_type'] = 'Folder'
         query['review_state'] = 'published'
 
         portal_properties = getToolByName(self.context, 'portal_properties')
@@ -144,85 +147,85 @@ class Main(BrowserView):
             if sortOrder is not None:
                 query['sort_order'] = sortOrder
 		
-	result = catalog.searchResults(query)
-	return result
+        result = catalog.searchResults(query)
+        return result
 
     template = DTMLFile('www/ajaxtabs.js', globals())
     template_main = DTMLFile('www/mainajaxtabs.js', globals())
     
     def javascript(self):
         tabs = AjaxTabs(self.context, self.request)
-	tabs.tabListId = 'webapp-globalnav'
-	tabs.tabPanelsId = 'region-content'
+        tabs.tabListId = 'webapp-globalnav'
+        tabs.tabPanelsId = 'region-content'
         context = aq_inner(self.context)
         template = self.template.__of__(context)
         template_main = self.template_main.__of__(context)	
-	menu = self.menu()
-	for m in menu:
-	    folder = getattr(self.context, m['id'], None)
-	    if folder:
+        menu = self.menu()
+        for m in menu:
+            folder = getattr(self.context, m['id'], None)
+            if folder:
                 defaultPage = folder.getDefaultPage()
-		if defaultPage:
-		    m['url'] = '%s/%s' % (m['url'], defaultPage)
-	    m['id'] = m['tabId']
+            if defaultPage:
+                m['url'] = '%s/%s' % (m['url'], defaultPage)
+            m['id'] = m['tabId']
 
 	
-	menu = self.menu()
-	submenuJS = ''
-	for m in menu:
-	    folder = getattr(self.context, m['id'], None)
-	    if folder:
+        menu = self.menu()
+        submenuJS = ''
+        for m in menu:
+            folder = getattr(self.context, m['id'], None)
+            if folder:
                 submenu = SubMenu(folder, self.request)
-		submenu = submenu.menu()
-		for sub in submenu:
-		    folder = getattr(self.context, m['id'], None)
-		    if folder:
-		        defaultPage = folder.getDefaultPage()
-			if defaultPage:
-			    sub['url'] = '%s/%s' % (sub['url'], defaultPage)
-		    sub['id'] = sub['tabId']
-	        defaultPage = folder.getDefaultPage()
-		if defaultPage:
-		    m['url'] = '%s/%s' % (m['url'], defaultPage)
-		    m['id'] = defaultPage
-	    if submenu:
-	        tabListId = 'submenu-%s' % m['id']
-		tabPanelsId = 'subpanels-%s' % m['id']
-		tabVarId = (defaultPage or m['tabId']).replace('-','_')
-		
-		submenuJS += template( tabs = submenu, tabListId = tabListId, tabPanelsId = tabPanelsId, tabVarId = 'tabs%s' % tabVarId ) 
-	    m['id'] = m['tabId']
-	    
-	tabListId = 'webapp-globalnav'
-	tabPanelsId = 'region-content'
-	self.request.RESPONSE.setHeader('Content-Type',
-					'application/x-javascript')
-	self._setCacheHeaders()
+            submenu = submenu.menu()
+            for sub in submenu:
+                folder = getattr(self.context, m['id'], None)
+                if folder:
+                    defaultPage = folder.getDefaultPage()
+                if defaultPage:
+                    sub['url'] = '%s/%s' % (sub['url'], defaultPage)
+                sub['id'] = sub['tabId']
+                defaultPage = folder.getDefaultPage()
+            if defaultPage:
+                m['url'] = '%s/%s' % (m['url'], defaultPage)
+                m['id'] = defaultPage
+            if submenu:
+               tabListId = 'submenu-%s' % m['id']  
+            tabPanelsId = 'subpanels-%s' % m['id']
+            tabVarId = (defaultPage or m['tabId']).replace('-','_')
+
+            submenuJS += template( tabs = submenu, tabListId = tabListId, tabPanelsId = tabPanelsId, tabVarId = 'tabs%s' % tabVarId ) 
+            m['id'] = m['tabId']
+
+        tabListId = 'webapp-globalnav'
+        tabPanelsId = 'region-content'
+        self.request.RESPONSE.setHeader('Content-Type',
+                'application/x-javascript')
+        self._setCacheHeaders()
         return  self.request.RESPONSE.write( template_main( tabs = menu, tabListId = tabListId, tabPanelsId = tabPanelsId, tabVarId = 'tabs', submenu=submenuJS) )		     	    
 
 
     def subjavascript(self):
         context = aq_inner(self.context)
         template = self.template.__of__(context)
-	menu = self.menu()
-	for m in menu:
-	    folder = getattr(self.context, m['id'], None)
-	    if folder:
+        menu = self.menu()
+        for m in menu:
+            folder = getattr(self.context, m['id'], None)
+            if folder:
                 submenu = SubMenu(folder, self.request)
-		submenu = submenu.menu()
-		for sub in submenu:
-		    folder = getattr(self.context, m['id'], None)
-		    if folder:
-		        defaultPage = folder.getDefaultPage()
-			if defaultPage:
-			    sub['url'] = '%s/%s' % (sub['url'], defaultPage)
-		    sub['id'] = sub['tabId']
+            submenu = submenu.menu()
+            for sub in submenu:
+                folder = getattr(self.context, m['id'], None)
+                if folder:
+                    defaultPage = folder.getDefaultPage()
+                if defaultPage:
+                    sub['url'] = '%s/%s' % (sub['url'], defaultPage)
+                sub['id'] = sub['tabId']
 
-	    if submenu:
-	        tabListId = 'submenu-%s' % m['id']
-		tabPanelsId = 'subpanels-%s' % m['id']
-	        return template( tabs = submenu, tabListId = tabListId, tabPanelsId = tabPanelsId, tabVarId = 'tabs%s' % m['tabId']) 
-        return ''
+            if submenu:
+                tabListId = 'submenu-%s' % m['id']
+                tabPanelsId = 'subpanels-%s' % m['id']
+                return template( tabs = submenu, tabListId = tabListId, tabPanelsId = tabPanelsId, tabVarId = 'tabs%s' % m['tabId']) 
+            return ''
 
     def inApplication(self):
         root = self._getRoot()
@@ -291,18 +294,17 @@ class SubMenu(Main):
 
 class PrepareBody(SubMenu):
 
-
     def _getFoldersToRoot(self):
 	""" Return the root of our application. """
         portal_url = getToolByName(self.context, 'portal_url')	    
         portal = portal_url.getPortalObject()
         obj = self.context
-	folders = []
+        folders = []
         while not IEEAWebApplication.providedBy(obj) and aq_base(obj) is not aq_base(portal):
-	    folders.append(obj.getId())
-	    obj = putils.parent(obj)
-	folders.reverse()
-	return folders
+            folders.append(obj.getId())
+            obj = putils.parent(obj)
+        folders.reverse()
+        return folders
 
     def _ignoreLink(self, link):
         ignoreLinks = ['/', 'http', 'javascript:' ]
@@ -313,27 +315,27 @@ class PrepareBody(SubMenu):
 
     def fixLinks(self, body):
         folders = self._getFoldersToRoot()[:-1]
-	relUrl = re.compile(r"""href=\s*[\"\'](.*?)[\"\']""", re.S)
-	links = relUrl.findall(body)
-	relFolder = folders.pop()
+        relUrl = re.compile(r"""href=\s*[\"\'](.*?)[\"\']""", re.S)
+        links = relUrl.findall(body)
+        relFolder = folders.pop()
         for link in links:
            if self._ignoreLink(link):
                continue
-	   newlink = link
-	   if link.startswith('../'):
-  	       newlink = link.replace('../', '')
-	   else:
-	      newlink = '%s/%s' % (relFolder, link)
-	   newlink = 'href="%s' % newlink
-	   link = 'href="%s' % link
-           body = body.replace(link, newlink)
-				  
-	return body
+        newlink = link
+        if link.startswith('../'):
+            newlink = link.replace('../', '')
+        else:
+            newlink = '%s/%s' % (relFolder, link)
+        newlink = 'href="%s' % newlink
+        link = 'href="%s' % link
+        body = body.replace(link, newlink)
+
+        return body
 	
     def prepareBody(self):
         view = zope.component.getMultiAdapter((self.context, self.request), name='subbody_unprepared')
-	html = view()
-	html = self.fixLinks(html)
-	return html.replace('src="../', 'src="')
+        html = view()
+        html = self.fixLinks(html)
+        return html.replace('src="../', 'src="')
 
 

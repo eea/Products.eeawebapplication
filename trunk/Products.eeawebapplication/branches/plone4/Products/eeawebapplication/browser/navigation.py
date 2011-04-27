@@ -1,9 +1,10 @@
 import zope.interface
 
-from Acquisition import aq_base, aq_inner
+from Acquisition import aq_base
 from Products.CMFPlone import utils
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.browser.interfaces import INavigationPortlet, INavtreeStrategy
+from Products.CMFPlone.browser.interfaces import INavigationPortlet
+from plone.app.layout.navigation.interfaces import INavtreeStrategy
 from Products.CMFPlone.browser.portlets.navigation import NavigationPortlet
 from Products.eeawebapplication.interface import IEEAWebApplication
 from Products.CMFPlone.browser.navtree import DefaultNavtreeStrategy
