@@ -54,13 +54,17 @@ div.panels > div.hidden img {
  display: block;
 }
 
-
-.visualColumnHideOneTwo #portal-column-content #content {
-    margin: 0 15px;
-    background: transparent url(shadow.png) no-repeat bottom right;
-    padding: 0 6px 6px 0 ! important;
+/* .visualColumnHideOneTwo #portal-column-content #content { */
+#content-core {
+    border: 1px solid #aaa;
+    border-style: none solid solid solid;
+    background: white ;
 }
-
+#content {
+    margin: 0 15px;
+background: transparent url(shadow.png) no-repeat bottom right;
+padding: 0 6px 6px 0 ! important;
+}
 /* old rounded tabs css from eeadesign2006 moved here since globalnav is using other html and css from NavigationManager */
 
 .tabnavigation {
@@ -150,11 +154,6 @@ div.panels > div.hidden img {
     border-bottom: 1px solid white;
 }
 
-#region-content {
-    background: white;
-    border: 1px solid #aaa;
-    border-style: none solid solid solid;
-}
 
 .webapp-submenu {
     display: block;

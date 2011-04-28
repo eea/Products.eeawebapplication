@@ -20,7 +20,6 @@
         permission="zope.Public"
         />
        
-    <!--
     <browser:page
         for="*"
         name="inApplication"
@@ -28,7 +27,6 @@
         permission="zope.Public"
 	attribute="inApplication"
         /> 
-    -->
     <browser:page
         for="*"
         template="www/webapp_menu.pt"

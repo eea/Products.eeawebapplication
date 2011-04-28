@@ -10,33 +10,35 @@ from Products.eeawebapplication.interface import IEEAWebApplication
 from Products.CMFPlone.browser.navtree import DefaultNavtreeStrategy
 
 def getApplicationRoot(obj):
-    portal_url = getToolByName(obj, 'portal_url')	    
+    portal_url = getToolByName(obj, 'portal_url')
     portal = portal_url.getPortalObject()
-        
-    while not IEEAWebApplication.providedBy(obj) and aq_base(obj) is not aq_base(portal):
+
+    while not IEEAWebApplication.providedBy(obj) and aq_base(obj) \
+                                            is not aq_base(portal):
         obj = utils.parent(obj)
-            
+
     return obj
 
 class ApplicationNavigationPortlet(navigation.Renderer):
     """ EEA website can have IEEAWebApplication roots. """
-    
+
     zope.interface.implements(INavigationPortlet)
 
     def title(self):
+        """ Returns title of root container. """
         root = self.getNavRoot()
         return root.Title()
-    
+
     def getNavRoot(self):
         """ Override """
-        if not utils.base_hasattr(self, '_root'):    
+        if not utils.base_hasattr(self, '_root'):
             self._root = [ getApplicationRoot( utils.context(self) ) ]
         return self._root[0]
 
 class ApplicationNavtreeStrategy(DefaultNavtreeStrategy):
     """ The navtree strategy used for the default navigation portlet and
         respects IEEAWebApplication root.  """
-    
+
     zope.interface.implements(INavtreeStrategy)
 
     def __init__(self, context, view=None):
