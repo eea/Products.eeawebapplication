@@ -20,26 +20,31 @@
 ################################################################################
 
 """
-$Id$
+$Id: ajaxtabs.py 23827 2006-05-22 13:09:21Z svincic $
 """
 
-from zope.interface import Interface
+import  zope.interface
+from Acquisition import aq_inner
+from App.special_dtml import DTMLFile
 
-class IWebAppView(Interface):
+from interfaces import IAjaxTabs
 
-    def menu():
-        """ Returns info for the main tabs. """
+class AjaxTabs(object):
 
-    def submenu():
-        """ Returns info for sub menu for the current page. """
+    zope.interface.implements(IAjaxTabs)
+    template = DTMLFile('www/ajaxtabs.js', globals())
 
-    def ajax():
-        """ Returns the Javascript to register and preload pages. """
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+        self.tabListId = 'webapp-globalnav'
+        self.tabPanelsId = 'content'
 
+    def javascript(self, pages):
+        context = aq_inner(self.context)
+        template = self.template.__of__(context)
+        self.request.RESPONSE.setHeader('Content-Type',
+                'application/x-javascript')
+        self.request.RESPONSE.write( template( tabs = pages, tabListId = self.tabListId, tabPanelsId = self.tabPanelsId) )
 
-class IAjaxTabs(Interface):
-    """ generate javascript for the tabs from the content in a webapp """
-
-    def javascript():
-        """ Generate javascript for the ajax tabs. """
 

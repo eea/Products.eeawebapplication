@@ -40,7 +40,7 @@ import logging
 logger = logging.getLogger('Products.eeawebapplication.browser.main')
 AjaxTabs = None
 try:
-    from Products.ptabs.ajaxtabs.ajaxtabs import AjaxTabs
+    from Products.eeawebapplication.browser.ajaxtabs import AjaxTabs
 except ImportError, err:
     logger.debug(err)
 

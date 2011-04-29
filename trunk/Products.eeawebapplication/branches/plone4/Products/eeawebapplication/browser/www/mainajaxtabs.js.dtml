@@ -56,5 +56,4 @@ function load&dtml-tabVarId;() {
 </dtml-in>
 }
 
-AttachEvent(window,"load", load&dtml-tabVarId;, false);
-
+AttachEvent(window,"load", load&dtml-tabVarId;, false)

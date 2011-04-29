@@ -18,7 +18,7 @@ function resizeDiv()
   }
 
    var newHeight=myHeight * 0.8;
-   document.getElementById("content-core").style.height='100%';
+   document.getElementById("region-content").style.height='100%';
    document.getElementById("content").style.height='100%';
 
    return newHeight;

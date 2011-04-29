@@ -1,4 +1,3 @@
-<metal:block use-macro="here/main_template/macros/master" />
 <tal:block   tal:define="webapp_view here/@@main_webapplication;
                          webapp context/@@application_submenu;
                          portal_tabs webapp/menu;">

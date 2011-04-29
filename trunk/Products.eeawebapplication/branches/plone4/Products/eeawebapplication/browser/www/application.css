@@ -1,69 +1,70 @@
 
 div.hidden div.panels .visualClear {
-  display: none;
+    display: none;
 }
 
 div.selected div.panels .visualClear {
-  display: block;
+    display: block;
 }
 
 div.hidden div.panels div.selected,
 div.panels div.hidden,
 div.panels > div.hidden {
- visibility: hidden;
- height: 0px;
+    visibility: hidden;
+    height: 0px;
 }
 
 div.panels  div.selected,
 div.panels > div.selected {
- visibility: visible;
- height: auto;
+    visibility: visible;
+    height: auto;
 }
 div.panels div.selected p,
 div.panels > div.selected img {
- display: block;
- height: auto;
- width: auto;
+    display: block;
+    height: auto;
+    width: auto;
 }
 
 div.panels div.hidden p,
 div.panels > div.hidden img {
- display: none;
- height: 0px;
- width: 0px;
+    display: none;
+    height: 0px;
+    width: 0px;
 }
 
 
 
 * html div.hidden div.panels,
-* html div.hidden div.panels div.selected,
-* html div.panels div.hidden {
- visibility: hidden;
- height: 0px;
- position: absolute;
- display: none;
- width: auto;
+    * html div.hidden div.panels div.selected,
+    * html div.panels div.hidden {
+        visibility: hidden;
+        height: 0px;
+        position: absolute;
+        display: none;
+        width: auto;
 }
 
 * html div.selected div.panels,
-* html div.selected div.panels div.selected,
-* html div.panels  div.selected {
- visibility: visible;
- height: 100%;
- position: auto;
- display: block;
+    * html div.selected div.panels div.selected,
+    * html div.panels  div.selected {
+        visibility: visible;
+        height: 100%;
+        position: auto;
+        display: block;
 }
 
 /* .visualColumnHideOneTwo #portal-column-content #content { */
-#content-core {
+#content {
     border: 1px solid #aaa;
     border-style: none solid solid solid;
-    background: white ;
+    background: white;
+    margin: 0px !important;
 }
-#content {
+#region-content {
     margin: 0 15px;
-background: transparent url(shadow.png) no-repeat bottom right;
-padding: 0 6px 6px 0 ! important;
+    background: transparent url(shadow.png) no-repeat bottom right;
+    padding: 0 6px 6px 0 ! important;
 }
 /* old rounded tabs css from eeadesign2006 moved here since globalnav is using other html and css from NavigationManager */
 
@@ -88,16 +89,16 @@ padding: 0 6px 6px 0 ! important;
     padding-left: 13px;
  }
 
-.tabnavigation li a {
-    display: block;
-    background: transparent url(/green-right.png) top right no-repeat ! important;
-    background: transparent url(/green-right.gif) top right no-repeat;
-    padding: 0.2em 1.25em 0.2em 0;
-    text-decoration: none;
-    width: 8em;
-    color: white;
-    font: bold 1em Verdana;
-    text-align: center;
+ .tabnavigation li a {
+     display: block;
+     background: transparent url(/green-right.png) top right no-repeat ! important;
+     background: transparent url(/green-right.gif) top right no-repeat;
+     padding: 0.2em 1.25em 0.2em 0;
+     text-decoration: none;
+     width: 8em;
+     color: white;
+     font: bold 1em Verdana;
+     text-align: center;
 }
 
 .tabnavigation li.selected {
@@ -135,11 +136,11 @@ padding: 0 6px 6px 0 ! important;
     border-bottom: 1px solid #aaa;
  }
 
-#webapp-globalnav li a {
-    background: transparent url(on02-right.png) top right no-repeat ! important;
-    background: transparent url(on02-right.gif) top right no-repeat;
-    color: #777777;
-    width: auto;
+ #webapp-globalnav li a {
+     background: transparent url(on02-right.png) top right no-repeat ! important;
+     background: transparent url(on02-right.gif) top right no-repeat;
+     color: #777777;
+     width: auto;
 }
 
 #webapp-globalnav li.selected  a {
@@ -159,21 +160,20 @@ padding: 0 6px 6px 0 ! important;
     display: block;
     background: white;
     padding: 0 0 0.5em 0;
-    margin: 0.2em 0 0 0;
+    margin: 0.2em 0 0 0 !important;
 }
 
 .webapp-submenu li {
-    display: inline;
+    display: inline !important;
     border-right: 1px solid #aaa;
     padding-right: 5px; 
     margin: 0 5px 5px 5px;
 }
 
-
 /* IE Fixes */
 
 * html #region-content {
-  width: 100%;
+    width: 100%;
 }
 * html*#region-content {
     width: auto;

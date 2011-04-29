@@ -11,6 +11,12 @@
      <browser:resource name="application.js"
           file="www/application.js" />
 
+     <browser:resource name="tabs.js"
+          file="www/tabs.js" />
+
+     <browser:resource name="ajax.js"
+          file="www/ajax.js" />
+
      <browser:resourceDirectory 
           name="images"
           directory="images" />
