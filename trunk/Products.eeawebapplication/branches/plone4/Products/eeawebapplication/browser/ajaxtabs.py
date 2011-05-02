@@ -27,7 +27,7 @@ import  zope.interface
 from Acquisition import aq_inner
 from App.special_dtml import DTMLFile
 
-from interfaces import IAjaxTabs
+from Products.eeawebapplication.browser.interfaces import IAjaxTabs
 
 class AjaxTabs(object):
 

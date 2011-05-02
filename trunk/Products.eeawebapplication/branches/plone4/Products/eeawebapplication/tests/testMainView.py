@@ -3,8 +3,7 @@
 #
 
 
-import WebAppTestCase
-
+from Products.eeawebapplication.tests import WebAppTestCase
 from Products.eeawebapplication.browser.main import Main, PrepareBody
 
 

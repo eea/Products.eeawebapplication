@@ -31,6 +31,7 @@ from zope.app.basicskin.standardmacros import Macros
 from Acquisition import aq_base, aq_inner, aq_parent
 from App.special_dtml import DTMLFile
 
+from Products.eeawebapplication.browser.interfaces import IWebAppView
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import utils as putils
@@ -44,7 +45,6 @@ try:
 except ImportError, err:
     logger.debug(err)
 
-from interfaces import IWebAppView
 
 class StandardMacros(BrowserView, Macros):
     """ StandardMacros BrowserView with main_template. """
@@ -316,7 +316,7 @@ class SubMenu(Main):
 class PrepareBody(SubMenu):
     """ PrepareBody class of Submenu """
     def _getFoldersToRoot(self):
-	""" Return the root of our application. """
+        """ Return the root of our application. """
         portal_url = getToolByName(self.context, 'portal_url')
         portal = portal_url.getPortalObject()
         obj = self.context
