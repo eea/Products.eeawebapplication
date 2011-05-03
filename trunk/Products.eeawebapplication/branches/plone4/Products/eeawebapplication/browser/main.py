@@ -55,6 +55,8 @@ class StandardMacros(BrowserView, Macros):
 # fragile (ie doesn't take into account non-ascii chars, etc)...
 # but previously didn't take care of newlines - Rocky
 def js_format(orig):
+    """ Formats strings into something that can be parsed by javascript
+    """
     formatted = ''
     for c in orig:
         if c == "\r":
@@ -248,7 +250,7 @@ class Main(BrowserView):
         return root != aq_base(portal)
 
 class SubMenu(Main):
-
+    """ SubMenu class that is responsible for the logic of sumenus """
     def _getRoot(self):
         """ Returns root of submenu. """
         if not putils.base_hasattr(self, '_root'):

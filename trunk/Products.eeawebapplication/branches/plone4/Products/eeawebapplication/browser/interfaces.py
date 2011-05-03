@@ -26,6 +26,7 @@ $Id$
 from zope.interface import Interface
 
 class IWebAppView(Interface):
+    """ IWebAppView interface """ 
 
     def menu():
         """ Returns info for the main tabs. """

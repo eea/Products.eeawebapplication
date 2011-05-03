@@ -1,3 +1,5 @@
+""" Module which implements a custom renderer for the portlet navigation
+"""
 import zope.interface
 
 from Acquisition import aq_base
@@ -10,6 +12,7 @@ from Products.eeawebapplication.interface import IEEAWebApplication
 from Products.CMFPlone.browser.navtree import DefaultNavtreeStrategy
 
 def getApplicationRoot(obj):
+    """ Returns root of application for given object """
     portal_url = getToolByName(obj, 'portal_url')
     portal = portal_url.getPortalObject()
 

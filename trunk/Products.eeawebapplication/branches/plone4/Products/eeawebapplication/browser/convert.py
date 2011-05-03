@@ -28,6 +28,7 @@ from Products.Five.browser import BrowserView
 from Products.eeawebapplication.interface import IEEAWebApplication
 
 class Convert(BrowserView):
+    """ Browser View that implements methods to make webapp from folder """
 
     def makeWebApp(self):
         """ Make folder webapp by providing IEEAWebApplication interface """

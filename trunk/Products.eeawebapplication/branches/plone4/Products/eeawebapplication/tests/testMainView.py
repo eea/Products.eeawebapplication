@@ -1,6 +1,5 @@
-#
-# Tests the Main view
-#
+""" Tests the Main view
+"""
 
 
 from Products.eeawebapplication.tests import WebAppTestCase
@@ -8,12 +7,15 @@ from Products.eeawebapplication.browser.main import Main, PrepareBody
 
 
 class TestMainView(WebAppTestCase.WebAppTestCase):
+    """ Main Test class """
 
     def afterSetUp(self):
+        """ after setup method of test case """
         self.url = self.portal.portal_url
         self.setupWebApp()
 
     def testSelectedTabs(self):
+        """ test selected tabs """
         self.setRoles(['Manager'])
         view = Main(self.folder.folder1, self.app.REQUEST)
         result = view.menu()
@@ -22,19 +24,22 @@ class TestMainView(WebAppTestCase.WebAppTestCase):
                 self.failIf(menu['class'] != 'selected')
 
     def testRelativUrlFix(self):
-        body = '''Some text with <a href="local-url">local</a> link and some <a href="../relative1">relative1</a>
-                  and a <a href="/absolute">absolute link</a> too. Why not a <a href="../folder2_ff/relative2-url">relative2</a>'''
-        answer = '''Some text with <a href="folder1/local-url">local</a> link and some <a href="relative1">relative1</a>
-                  and a <a href="/absolute">absolute link</a> too. Why not a <a href="folder2_ff/relative2-url">relative2</a>'''
+        """ test relative url fix """
+        body = '''Some text with <a href="local-url">local</a> link and some 
+                    <a href="../relative1">relative1</a>
+                  and a <a href="/absolute">absolute link</a> too. Why not a 
+                  <a href="../folder2_ff/relative2-url">relative2</a>'''
+        answer = '''Some text with <a href="folder1/local-url">local</a> link 
+                and some <a href="relative1">relative1</a>and a 
+                <a href="/absolute">absolute link</a> too. Why not a 
+                <a href="folder2_ff/relative2-url">relative2</a>'''
         page = self.folder.folder1.page1
         view = PrepareBody(page, self.app.REQUEST)
         result =  view.fixLinks(body)
         self.failIf(answer != result, result)
-        
 
-        
- 
 def test_suite():
+    """ test suite """
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(TestMainView))

@@ -1,6 +1,5 @@
-#
-# Runs all tests in the current directory
-#
+""" Runs all tests in the current directory
+"""
 # Execute like:
 #   python runalltests.py
 #
