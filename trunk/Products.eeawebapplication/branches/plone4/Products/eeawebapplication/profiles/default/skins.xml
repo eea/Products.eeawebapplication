@@ -3,7 +3,7 @@
 <object name="portal_skins">
 
   <object name="eea_webapplication" meta_type="Filesystem Directory View"
-    directory="Products.eea_webapplication:skins/eea_webapplication" />
+    directory="Products.eeawebapplication:skins/eea_webapplication" />
 
  <skin-path name="*">
   <layer insert-after="custom" name="eea_webapplication" />
