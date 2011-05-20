@@ -2,10 +2,13 @@
            xmlns:browser="http://namespaces.zope.org/browser"
            xmlns:five="http://namespaces.zope.org/five">
 
-  <include package=".browser" />
   <include file="profiles.zcml" />
-  <five:registerPackage package="." initialize=".initialize" />
+  <include file="skins.zcml" />
+  
+  <include package=".browser" />
+  <include package=".upgrades" />
 
+  <five:registerPackage package="." initialize=".initialize" />
   <five:implements class="ZPublisher.HTTPRequest.HTTPRequest"
     interface="zope.publisher.interfaces.browser.IDefaultBrowserLayer"
     />
