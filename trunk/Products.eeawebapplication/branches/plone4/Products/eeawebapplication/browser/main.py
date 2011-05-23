@@ -1,53 +1,28 @@
-################################################################################
-# Copyright (C) 2006  EEA - European Enviromental Agency
-# 			    Antonio De Marinis <antonio.de.marinis@eea.eu.int> 
-#                    Sasha Vincic <sasha.vincic@lovelysystems.com>
-#                    
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-# 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-# MA  02110-1301, USA.
-################################################################################
-
+""" Main
 """
-$Id$
-"""
-
 import  zope.interface
 import zope.component
-
 import re
 from zope.app.basicskin.standardmacros import Macros
 from Acquisition import aq_base, aq_inner, aq_parent
 from App.special_dtml import DTMLFile
-
 from Products.eeawebapplication.browser.interfaces import IWebAppView
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import utils as putils
 from Products.eeawebapplication.interface import IEEAWebApplication
 import logging
-
-logger = logging.getLogger('Products.eeawebapplication.browser.main')
-AjaxTabs = None
 try:
     from Products.eeawebapplication.browser.ajaxtabs import AjaxTabs
 except ImportError, err:
+    AjaxTabs = None
     logger.debug(err)
 
+logger = logging.getLogger('Products.eeawebapplication.browser.main')
 
 class StandardMacros(BrowserView, Macros):
-    """ StandardMacros BrowserView with main_template. """
+    """ StandardMacros BrowserView with main_template.
+    """
     macro_pages = ('main_template','menu')
 
 # Format strings into something that can be parsed as
@@ -71,28 +46,33 @@ def js_format(orig):
     return formatted
 
 class Main(BrowserView):
-    """ Main BrowserView for Products.eeawebapplication. """
+    """ Main BrowserView for Products.eeawebapplication.
+    """
     zope.interface.implements(IWebAppView)
 
     def _setCacheHeaders(self):
-        """ Set cache headers. """
+        """ Set cache headers.
+        """
         self.request.RESPONSE.setHeader('Cache-Control',
                         'max-age=0, s-maxage=3600, must-revalidate')
 
     def test(self, variable, trueValue, falseValue):
-        """ Tests if variable is assigned & returns trueValue or falseValue. """
+        """ Tests if variable is assigned & returns trueValue or falseValue.
+        """
         if variable:
             return trueValue
         else:
             return falseValue
 
     def home(self):
-        """ Returns absolute_url of root. """
+        """ Returns absolute_url of root.
+        """
         root = self._getRoot()
         return root.absolute_url()
 
     def menu(self):
-        """ Constructs menu for root folders. """
+        """ Constructs menu for root folders.
+        """
         tabs = self.pages()
         menu = []
 
@@ -117,7 +97,8 @@ class Main(BrowserView):
         return menu
 
     def getDefaultPageId(self):
-        """ Returns default page id. """
+        """ Returns default page id.
+        """
         cId = self.context.getId()
         root = self._getRoot()
         if hasattr(root, cId) and root.getId() != cId:
@@ -126,7 +107,8 @@ class Main(BrowserView):
             return self.pages()[0].getId
 
     def _getRoot(self):
-        """ Return the root of our application. """
+        """ Return the root of our application.
+        """
         if not putils.base_hasattr(self, '_root'):
             portal_url = getToolByName(self.context, 'portal_url')
             portal = portal_url.getPortalObject()
@@ -138,7 +120,8 @@ class Main(BrowserView):
         return self._root[0]
 
     def pages(self):
-        """ Return query of published folders.  """
+        """ Return query of published folders.
+        """
         catalog = getToolByName(self.context, 'portal_catalog')
         obj = self._getRoot()
         query = {}
@@ -164,7 +147,8 @@ class Main(BrowserView):
     template_main = DTMLFile('www/mainajaxtabs.js', globals())
 
     def javascript(self):
-        """ Ajaxifies root tabs. """
+        """ Ajaxifies root tabs.
+        """
         tabs = AjaxTabs(self.context, self.request)
         tabs.tabListId = 'webapp-globalnav'
         tabs.tabPanelsId = 'content'
@@ -217,7 +201,8 @@ class Main(BrowserView):
 
 
     def subjavascript(self):
-        """ Javascript for submenus. """
+        """ Javascript for submenus.
+        """
         context = aq_inner(self.context)
         template = self.template.__of__(context)
         menu = self.menu()
@@ -243,16 +228,19 @@ class Main(BrowserView):
         return ''
 
     def inApplication(self):
-        """ Boolean if folder isn't on the root of the plone site. """
+        """ Boolean if folder isn't on the root of the plone site.
+        """
         root = self._getRoot()
         portal_url = getToolByName(self.context, 'portal_url')
         portal = portal_url.getPortalObject()
         return root != aq_base(portal)
 
 class SubMenu(Main):
-    """ SubMenu class that is responsible for the logic of sumenus """
+    """ SubMenu class that is responsible for the logic of sumenus
+    """
     def _getRoot(self):
-        """ Returns root of submenu. """
+        """ Returns root of submenu.
+        """
         if not putils.base_hasattr(self, '_root'):
             portal_url = getToolByName(self.context, 'portal_url')
             portal = portal_url.getPortalObject()
@@ -266,7 +254,8 @@ class SubMenu(Main):
         return self._root[0]
 
     def pages(self):
-        """ Returns pages of submenu folders. """
+        """ Returns pages of submenu folders.
+        """
         catalog = getToolByName(self.context, 'portal_catalog')
         obj = self._getRoot()
         query = {}
@@ -288,16 +277,19 @@ class SubMenu(Main):
         return result
 
     def onlyOnePage(self):
-        """ Boolean if only one page is present. """
+        """ Boolean if only one page is present.
+        """
         return len(self.pages()) == 1
 
     def getDefaultPagePanelId(self):
-        """ Returns default panel id. """
+        """ Returns default panel id.
+        """
         return 'panel_subportaltab_%s' % \
                 self.getDefaultPageId().replace('-','_')
 
     def getDefaultPageId(self):
-        """ Retrieves the default page id. """
+        """ Retrieves the default page id.
+        """
         root = self._getRoot()
         defaultId = root.getDefaultPage()
 
@@ -308,7 +300,8 @@ class SubMenu(Main):
         return defaultId
 
     def getDefaultPage(self):
-        """ Returns the default page. """
+        """ Returns the default page.
+        """
         defaultPage = self.context[ self.getDefaultPageId() ]
         view = zope.component.getMultiAdapter((defaultPage, self.request),
                                                             name='subbody')
@@ -316,9 +309,11 @@ class SubMenu(Main):
         return view()
 
 class PrepareBody(SubMenu):
-    """ PrepareBody class of Submenu """
+    """ PrepareBody class of Submenu
+    """
     def _getFoldersToRoot(self):
-        """ Return the root of our application. """
+        """ Return the root of our application.
+        """
         portal_url = getToolByName(self.context, 'portal_url')
         portal = portal_url.getPortalObject()
         obj = self.context
@@ -331,7 +326,8 @@ class PrepareBody(SubMenu):
         return folders
 
     def _ignoreLink(self, link):
-        """ ignore links that start with special flags. """
+        """ ignore links that start with special flags.
+        """
         ignoreLinks = ['/', 'http', 'javascript:' ]
         for start in ignoreLinks:
             if link.startswith(start):
@@ -339,7 +335,8 @@ class PrepareBody(SubMenu):
         return False
 
     def fixLinks(self, body):
-        """ Fix links from page body. """
+        """ Fix links from page body.
+        """
         folders = self._getFoldersToRoot()[:-1]
         relUrl = re.compile(r"""href=\s*[\"\'](.*?)[\"\']""", re.S)
         links = relUrl.findall(body)
@@ -358,11 +355,10 @@ class PrepareBody(SubMenu):
         return body
 
     def prepareBody(self):
-        """ Prepares body of page for view. """
+        """ Prepares body of page for view.
+        """
         view = zope.component.getMultiAdapter((self.context, self.request),
                                                     name='subbody_unprepared')
         html = view()
         html = self.fixLinks(html)
         return html.replace('src="../', 'src="')
-
-

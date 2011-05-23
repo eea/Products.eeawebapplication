@@ -1,18 +1,12 @@
-<configure
-  xmlns="http://namespaces.zope.org/zope"
-  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-  i18n_domain="eea">
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+           i18n_domain="eea">
 
-  <genericsetup:upgradeSteps
-    source="*"
-    destination="4.0"
-    profile="Products.eeawebapplication:default">
-
-    <genericsetup:upgradeDepends
-      title="Upgrade to Plone4"
-      import_steps="skins"
-      />
-
+  <genericsetup:upgradeSteps source="*"
+                             destination="4.0"
+                             profile="Products.eeawebapplication:default">
+      <genericsetup:upgradeDepends title="Upgrade to Plone4"
+                                   import_steps="skins" />
   </genericsetup:upgradeSteps>
 
 </configure>

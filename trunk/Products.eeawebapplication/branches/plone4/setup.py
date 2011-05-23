@@ -1,23 +1,24 @@
-""" setup.py """
-
+""" EEA Web Application installer
+"""
 from setuptools import setup, find_packages
 import os
 
-name = 'Products.eeawebapplication'
-path = name.split('.') + ['version.txt']
-version = open(os.path.join(*path)).read().strip()
+NAME = 'Products.eeawebapplication'
+PATH = NAME.split('.') + ['version.txt']
+VERSION = open(os.path.join(*PATH)).read().strip()
 
 setup(
- name='Products.eeawebapplication',
- version=version,
- description="eeawebapplication skin for EEA",
+ name=NAME,
+ version=VERSION,
+ description="EEA Web Application skin for EEA",
  long_description=open("README.txt").read() + "\n" +
                   open(os.path.join("docs", "HISTORY.txt")).read(),
  url="https://svn.eionet.europa.eu/projects/"
      "Zope/browser/trunk/Products.eeawebapplication",
  classifiers=[
-   "Framework :: Plone",
-   "Programming Language :: Python",
+           "Framework :: Plone",
+           "Programming Language :: Python",
+           "Topic :: Software Development :: Libraries :: Python Modules",
    ],
  keywords='EEA web application',
  author='Antonio de Marinis (EEA), European Environment Agency',

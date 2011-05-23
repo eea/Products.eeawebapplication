@@ -5,8 +5,8 @@
   <object name="eea_webapplication" meta_type="Filesystem Directory View"
     directory="Products.eeawebapplication:skins/eea_webapplication" />
 
- <skin-path name="*">
-  <layer insert-after="custom" name="eea_webapplication" />
- </skin-path>
+  <skin-path name="*">
+    <layer insert-after="custom" name="eea_webapplication" />
+  </skin-path>
 
 </object>
