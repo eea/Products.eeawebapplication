@@ -12,13 +12,14 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import utils as putils
 from Products.eeawebapplication.interface import IEEAWebApplication
 import logging
+
+AjaxTabs = None
+logger = logging.getLogger('Products.eeawebapplication.browser.main')
+
 try:
     from Products.eeawebapplication.browser.ajaxtabs import AjaxTabs
 except ImportError, err:
-    AjaxTabs = None
     logger.debug(err)
-
-logger = logging.getLogger('Products.eeawebapplication.browser.main')
 
 class StandardMacros(BrowserView, Macros):
     """ StandardMacros BrowserView with main_template.
