@@ -1,16 +1,18 @@
-""" web app test case
+""" Web app test case
 """
 import zope.interface
-from Products.CMFPlone.tests import PloneTestCase
-
 from Products.eeawebapplication.interface import IEEAWebApplication
+from Products.PloneTestCase import PloneTestCase as ptc
 
+ptc.setupPloneSite()
 
-class WebAppTestCase(PloneTestCase.PloneTestCase):
-    """ Web app test case main class """
+class WebAppTestCase(ptc.PloneTestCase):
+    """ Web app test case main class
+    """
 
     def setupWebApp(self):
-        """ setup web app test """
+        """ setup web app test
+        """
         zope.interface.directlyProvides(self.folder, IEEAWebApplication)
         self.workflow = self.portal.portal_workflow
         self.folder.invokeFactory('Folder', id='folder1', text='data',

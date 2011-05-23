@@ -1,21 +1,22 @@
 """ Tests the Main view
 """
-
-
-from Products.eeawebapplication.tests import WebAppTestCase
+from Products.eeawebapplication.tests.base import WebAppTestCase
 from Products.eeawebapplication.browser.main import Main, PrepareBody
+from unittest import TestSuite, makeSuite
 
-
-class TestMainView(WebAppTestCase.WebAppTestCase):
-    """ Main Test class """
+class TestMainView(WebAppTestCase):
+    """ Main Test class
+    """
 
     def afterSetUp(self):
-        """ after setup method of test case """
+        """ after setup method of test case
+        """
         self.url = self.portal.portal_url
         self.setupWebApp()
 
     def testSelectedTabs(self):
-        """ test selected tabs """
+        """ test selected tabs
+        """
         self.setRoles(['Manager'])
         view = Main(self.folder.folder1, self.app.REQUEST)
         result = view.menu()
@@ -24,7 +25,8 @@ class TestMainView(WebAppTestCase.WebAppTestCase):
                 self.failIf(menu['class'] != 'selected')
 
     def testRelativUrlFix(self):
-        """ test relative url fix """
+        """ test relative url fix
+        """
         body = 'Some text with <a href="local-url">local</a> link and some' \
                '<a href="../relative1">relative1</a>' \
                'and a <a href="/absolute">absolute link</a> too. Why not a' \
@@ -39,9 +41,8 @@ class TestMainView(WebAppTestCase.WebAppTestCase):
         self.failIf(answer != result, result)
 
 def test_suite():
-    """ test suite """
-    from unittest import TestSuite, makeSuite
+    """ test suite
+    """
     suite = TestSuite()
     suite.addTest(makeSuite(TestMainView))
     return suite
-
