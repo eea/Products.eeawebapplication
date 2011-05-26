@@ -4,9 +4,9 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="Products.eeawebapplication"
+      title="EEA Web Application"
       directory="profiles/default"
-      description='Extension profile for the "Products.eeawebapplication" package'
+      description='Extension profile for the EEA Web Application xxx'
       provides="Products.GenericSetup.interfaces.EXTENSION" />
 
 </configure>
