@@ -6,7 +6,7 @@
       name="default"
       title="EEA Web Application"
       directory="profiles/default"
-      description='Extension profile for the EEA Web Application xxx'
+      description='Extension profile for the EEA Web Application'
       provides="Products.GenericSetup.interfaces.EXTENSION" />
 
 </configure>
