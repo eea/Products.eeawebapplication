@@ -3,7 +3,7 @@
 import  zope.interface
 import zope.component
 import re
-from zope.app.basicskin.standardmacros import Macros
+from Products.Five.skin.standardmacros import Macros
 from Acquisition import aq_base, aq_inner, aq_parent
 from App.special_dtml import DTMLFile
 from Products.eeawebapplication.browser.interfaces import IWebAppView
