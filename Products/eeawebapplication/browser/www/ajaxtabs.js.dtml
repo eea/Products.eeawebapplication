@@ -1,0 +1,1 @@
+var &dtml-tabVarId; = new AjaxTabs.Tabs( "<dtml-var tabListId>", "&dtml-tabPanelsId;");
