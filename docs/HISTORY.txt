@@ -3,6 +3,8 @@ Changelog
 
 4.2-dev - (2011-11-18)
 ----------------------
+ * Bug fix: Properly link resources in css
+ [tiberich #4956]
 
 4.1-dev - (2011-11-18)
 ----------------------
