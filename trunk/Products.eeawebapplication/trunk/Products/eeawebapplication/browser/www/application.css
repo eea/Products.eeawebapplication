@@ -63,7 +63,7 @@ div.panels > div.hidden img {
 }
 #region-content {
     margin: 0 15px;
-    background: transparent url(shadow.png) no-repeat bottom right;
+    background: transparent url(/shadow.png) no-repeat bottom right;
     padding: 0 6px 6px 0 ! important;
 }
 /* old rounded tabs css from eeadesign2006 moved here since globalnav is using other html and css from NavigationManager */
@@ -131,14 +131,14 @@ div.panels > div.hidden img {
 
 
 #webapp-globalnav li {
-    background: transparent url(on02-left.png) top left no-repeat ! important;
-    background: transparent url(on02-left.gif) top left no-repeat;
+    background: transparent url(/on02-left.png) top left no-repeat ! important;
+    background: transparent url(/on02-left.gif) top left no-repeat;
     border-bottom: 1px solid #aaa;
  }
 
  #webapp-globalnav li a {
-     background: transparent url(on02-right.png) top right no-repeat ! important;
-     background: transparent url(on02-right.gif) top right no-repeat;
+     background: transparent url(/on02-right.png) top right no-repeat ! important;
+     background: transparent url(/on02-right.gif) top right no-repeat;
      color: #777777;
      width: auto;
 }
