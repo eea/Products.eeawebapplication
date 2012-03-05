@@ -1,0 +1,14 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           i18n_domain="eea">
+
+  <include file="profiles.zcml" />
+  <include file="skins.zcml" />
+
+  <include package=".browser" />
+  <include package=".upgrades" />
+
+  <class class="ZPublisher.HTTPRequest.HTTPRequest">
+    <implements interface="zope.publisher.interfaces.browser.IDefaultBrowserLayer" />
+  </class>
+
+</configure>
