@@ -1,21 +1,21 @@
 Changelog
 =========
 
-4.3-dev - (2012-03-05)
+4.3-dev - (unreleased)
 ----------------------
 * Bug fix: fixed markup of HISTORY.txt file
   [ciobabog refs #5231]
 
-4.2-dev - (2011-11-18)
+4.2 - (2011-03-05)
 ----------------------
 * Bug fix: Properly link resources in css
   [tiberich #4956]
 
-4.1-dev - (2011-11-18)
+4.1 - (2011-11-18)
 ----------------------
 * Rerelease broken egg  
 
-4.0-dev - (2011-02-23)
+4.0 - (2011-02-23)
 ----------------------
 * Feature: Plone 4.0.4 compatible release
   [ichimdav #4271]
