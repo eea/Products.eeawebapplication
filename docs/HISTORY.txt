@@ -16,7 +16,7 @@ Changelog
 
 4.1 - (2011-11-18)
 ----------------------
-* Rerelease broken egg  
+* Rerelease broken egg
 
 4.0 - (2011-02-23)
 ----------------------
