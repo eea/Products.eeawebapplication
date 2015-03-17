@@ -1,0 +1,93 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           i18n_domain="eea">
+
+    <include file="resources.zcml" />
+
+    <browser:page for="*"
+                  name="application_navigation_view"
+                  class=".navigation.ApplicationNavigationPortlet"
+                  permission="zope.Public"
+                  allowed_interface=".navigation.INavigationPortlet" />
+
+    <browser:page for="*"
+                  name="main_webapplication"
+                  class=".main.StandardMacros"
+                  permission="zope.Public" />
+
+    <browser:page for="*"
+                  name="inApplication"
+                  class=".main.Main"
+                  permission="zope.Public"
+                  attribute="inApplication" />
+
+    <browser:page for="*"
+                  template="www/webapp_menu.pt"
+                  name="menu"
+                  permission="zope.Public" />
+
+    <browser:page for="*"
+                  name="application"
+                  template="www/application_view.pt"
+                  class=".main.Main"
+                  permission="zope.Public" />
+
+    <browser:page for="*"
+                  name="application_menu"
+                  class=".main.Main"
+                  permission="zope.Public"
+                  attribute="menu" />
+
+    <browser:page for="*"
+                  name="application_submenu"
+                  class=".main.SubMenu"
+                  permission="zope.Public" />
+
+    <browser:page for="*"
+                  name="application_submenu_direct"
+                  class=".main.SubMenu"
+                  permission="zope.Public"
+                  attribute="menu" />
+
+    <browser:page for="*"
+                  name="webapp_javascript"
+                  class=".main.Main"
+                  attribute="javascript"
+                  permission="zope.Public" />
+
+    <browser:page for="*"
+                  name="webapp_javascript_submenu"
+                  class=".main.Main"
+                  attribute="subjavascript"
+                  permission="zope.Public" />
+
+    <browser:page for="*"
+                  name="submenu_javascript"
+                  class=".main.SubMenu"
+                  attribute="javascript"
+                  permission="zope.Public" />
+
+    <browser:page for="*"
+                  name="makeWebApp"
+                  class=".convert.Convert"
+                  attribute="makeWebApp"
+                  permission="zope.Public" />
+
+    <browser:page for="Products.eeawebapplication.interface.IEEAWebApplication"
+                  name="removeWebApp"
+                  class=".convert.Convert"
+                  attribute="removeWebApp"
+                  permission="zope.Public" />
+
+    <browser:page for="*"
+                  name="subbody_unprepared"
+                  template="www/subbody_view.pt"
+                  permission="zope.Public" />
+
+    <browser:page for="*"
+                  name="subbody"
+                  class=".main.PrepareBody"
+                  attribute="prepareBody"
+                  permission="zope.Public" />
+
+</configure>

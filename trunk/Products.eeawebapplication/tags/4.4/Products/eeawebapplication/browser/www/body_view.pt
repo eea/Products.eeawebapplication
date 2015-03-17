@@ -1,0 +1,29 @@
+<tal:block   tal:define="webapp_view here/@@main_webapplication;
+                         webapp context/@@application_submenu;
+                         portal_tabs webapp/menu;">
+
+<tal:subelements tal:condition="not: webapp/onlyOnePage">
+     <metal:submenu use-macro="webapp_view/submenu">
+         Sub menu
+     </metal:submenu>
+
+     <div id="subpanels" class="panels"
+          tal:attributes="id string:subpanels-${context/getId}">
+    
+   <div id="" tal:attributes="id webapp/getDefaultPagePanelId" class="selected">
+      <tal:defaultPage
+          tal:replace="structure webapp/getDefaultPage" />
+     </div>
+     </div>
+
+</tal:subelements>
+
+<tal:onlyonepage tal:condition="webapp/onlyOnePage">
+     <div id="subpanels" class="panels"
+          tal:define="page python:portal_tabs[0]['id'];"
+          tal:attributes="id string:subpanels-${context/getId}"          
+          tal:replace="structure webapp/getDefaultPage">
+
+     </div>
+</tal:onlyonepage>
+</tal:block>
