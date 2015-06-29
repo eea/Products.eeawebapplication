@@ -37,7 +37,7 @@ class ApplicationNavigationPortlet(navigation.Renderer):
         """ Override
         """
         if not utils.base_hasattr(self, '_root'):
-            self._root = [ getApplicationRoot( utils.context(self) ) ]
+            self._root = [getApplicationRoot(utils.context(self))]
         return self._root[0]
 
 class ApplicationNavtreeStrategy(DefaultNavtreeStrategy):

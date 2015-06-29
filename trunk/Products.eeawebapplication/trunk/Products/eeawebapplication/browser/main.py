@@ -24,7 +24,7 @@ except ImportError, err:
 class StandardMacros(BrowserView, Macros):
     """ StandardMacros BrowserView with main_template.
     """
-    macro_pages = ('main_template','menu')
+    macro_pages = ('main_template', 'menu')
 
 # Format strings into something that can be parsed as
 # javascript.  Be warned that this logic right now is quite
@@ -83,18 +83,18 @@ class Main(BrowserView):
             checkUrl = not currentUrl == self.home()
             if checkUrl and tab.getURL() in currentUrl:
                 cssClass = 'selected'
-            tabId = tab.getId.replace('-','_')
-            cxId =  self.context.getId().replace('-','_')
-            onClick  = "javascript:tabs%s.OpenTab" \
-                    "('subportaltab_%s','%s','%s/subbody', false, '');" % \
+            tabId = tab.getId.replace('-', '_')
+            cxId = self.context.getId().replace('-', '_')
+            onClick = "javascript:tabs%s.OpenTab" \
+                    "('subportaltab_%s', '%s', '%s/subbody', false, '');" % \
                     (cxId, tabId, js_format(tab.Title), tab.getURL())
-            menu.append( {'id': tab.getId,
+            menu.append({'id': tab.getId,
                     'tabId': tabId,
                     'title': tab.Title,
                     'url': '%s' % tab.getURL(),
                     'description': tab.Description,
                     'class': cssClass,
-                    'onclick': onClick })
+                    'onclick': onClick})
         return menu
 
     def getDefaultPageId(self):
@@ -116,7 +116,7 @@ class Main(BrowserView):
             obj = self.context
             while not IEEAWebApplication.providedBy(obj) and aq_base(obj) \
                                                     is not aq_base(portal):
-                obj =  aq_parent(aq_inner(obj))
+                obj = aq_parent(aq_inner(obj))
             self._root = [obj]
         return self._root[0]
 
@@ -126,8 +126,8 @@ class Main(BrowserView):
         catalog = getToolByName(self.context, 'portal_catalog')
         obj = self._getRoot()
         query = {}
-        query['path'] =  {'query' : '/'.join(obj.getPhysicalPath()),
-                     'depth' : 1 }
+        query['path'] = {'query' : '/'.join(obj.getPhysicalPath()),
+                     'depth' : 1}
         query['portal_type'] = 'Folder'
         query['review_state'] = 'published'
 
@@ -186,9 +186,9 @@ class Main(BrowserView):
             if submenu:
                 tabListId = 'submenu-%s' % m['id']
                 tabPanelsId = 'subpanels-%s' % m['id']
-                tabVarId = (defaultPage or m['tabId']).replace('-','_')
-                submenuJS += template( tabs = submenu, tabListId = tabListId,
-                    tabPanelsId = tabPanelsId, tabVarId = 'tabs%s' % tabVarId )
+                tabVarId = (defaultPage or m['tabId']).replace('-', '_')
+                submenuJS += template(tabs=submenu, tabListId=tabListId,
+                    tabPanelsId=tabPanelsId, tabVarId='tabs%s' % tabVarId)
             m['id'] = m['tabId']
 
         tabListId = 'webapp-globalnav'
@@ -196,9 +196,9 @@ class Main(BrowserView):
         self.request.RESPONSE.setHeader('Content-Type',
                 'application/x-javascript')
         self._setCacheHeaders()
-        return  self.request.RESPONSE.write( template_main( tabs = menu,
-            tabListId = tabListId, tabPanelsId = tabPanelsId,
-                        tabVarId = 'tabs', submenu=submenuJS) )
+        return  self.request.RESPONSE.write(template_main(tabs=menu,
+            tabListId=tabListId, tabPanelsId=tabPanelsId,
+                        tabVarId='tabs', submenu=submenuJS))
 
 
     def subjavascript(self):
@@ -223,9 +223,9 @@ class Main(BrowserView):
             if submenu:
                 tabListId = 'submenu-%s' % m['id']
                 tabPanelsId = 'subpanels-%s' % m['id']
-                return template( tabs = submenu, tabListId = tabListId,
-                        tabPanelsId = tabPanelsId, tabVarId = 'tabs%s' %
-                                                                m['tabId'])
+                return template(tabs=submenu, tabListId=tabListId,
+                        tabPanelsId=tabPanelsId, tabVarId='tabs%s' %
+                                                            m['tabId'])
         return ''
 
     def inApplication(self):
@@ -260,8 +260,8 @@ class SubMenu(Main):
         catalog = getToolByName(self.context, 'portal_catalog')
         obj = self._getRoot()
         query = {}
-        query['path'] =  {'query' : '/'.join(obj.getPhysicalPath()),
-                     'depth' : 1 }
+        query['path'] = {'query' : '/'.join(obj.getPhysicalPath()),
+                     'depth' : 1}
         query['review_state'] = 'published'
 
         portal_properties = getToolByName(self.context, 'portal_properties')
@@ -286,7 +286,7 @@ class SubMenu(Main):
         """ Returns default panel id.
         """
         return 'panel_subportaltab_%s' % \
-                self.getDefaultPageId().replace('-','_')
+                self.getDefaultPageId().replace('-', '_')
 
     def getDefaultPageId(self):
         """ Retrieves the default page id.
@@ -303,7 +303,7 @@ class SubMenu(Main):
     def getDefaultPage(self):
         """ Returns the default page.
         """
-        defaultPage = self.context[ self.getDefaultPageId() ]
+        defaultPage = self.context[self.getDefaultPageId()]
         view = zope.component.getMultiAdapter((defaultPage, self.request),
                                                             name='subbody')
         self._setCacheHeaders()
@@ -329,7 +329,7 @@ class PrepareBody(SubMenu):
     def _ignoreLink(self, link):
         """ ignore links that start with special flags.
         """
-        ignoreLinks = ['/', 'http', 'javascript:' ]
+        ignoreLinks = ['/', 'http', 'javascript:']
         for start in ignoreLinks:
             if link.startswith(start):
                 return True

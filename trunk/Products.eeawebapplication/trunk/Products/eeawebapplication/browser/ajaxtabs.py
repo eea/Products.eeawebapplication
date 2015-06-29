@@ -24,5 +24,5 @@ class AjaxTabs(object):
         template = self.template.__of__(context)
         self.request.RESPONSE.setHeader('Content-Type',
                 'application/x-javascript')
-        self.request.RESPONSE.write( template( tabs = pages,
-            tabListId = self.tabListId, tabPanelsId = self.tabPanelsId) )
+        self.request.RESPONSE.write(template(tabs=pages,
+            tabListId=self.tabListId, tabPanelsId=self.tabPanelsId))

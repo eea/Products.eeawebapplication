@@ -37,7 +37,7 @@ class TestMainView(WebAppTestCase):
                 '<a href="folder2_ff/relative2-url">relative2</a>'
         page = self.folder.folder1.page1
         view = PrepareBody(page, self.app.REQUEST)
-        result =  view.fixLinks(body)
+        result = view.fixLinks(body)
         self.failIf(answer != result, result)
 
 def test_suite():
