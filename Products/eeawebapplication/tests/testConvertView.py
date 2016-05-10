@@ -1,10 +1,13 @@
 """ Tests the Main view
 """
+from unittest import TestSuite, makeSuite
+
 import zope.interface
+
 from Products.CMFPlone.tests import PloneTestCase
 from Products.eeawebapplication.browser.convert import Convert
 from Products.eeawebapplication.interface import IEEAWebApplication
-from unittest import TestSuite, makeSuite
+
 
 class TestConvertView(PloneTestCase.PloneTestCase):
     """ TestConvertView main class

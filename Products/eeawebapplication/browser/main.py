@@ -1,25 +1,31 @@
 """ Main
 """
-import  zope.interface
-import zope.component
-import re
-from Products.Five.skin.standardmacros import Macros
-from Acquisition import aq_base, aq_inner, aq_parent
-from App.special_dtml import DTMLFile
-from Products.eeawebapplication.browser.interfaces import IWebAppView
-from Products.Five.browser import BrowserView
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import utils as putils
-from Products.eeawebapplication.interface import IEEAWebApplication
 import logging
 
-AjaxTabs = None
-logger = logging.getLogger('Products.eeawebapplication.browser.main')
+import re
+import zope.interface
+
+import zope.component
+
+from Acquisition import aq_base, aq_inner, aq_parent
+from App.special_dtml import DTMLFile
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone import utils as putils
+from Products.Five.browser import BrowserView
+from Products.Five.skin.standardmacros import Macros
+from Products.eeawebapplication.browser.interfaces import IWebAppView
+from Products.eeawebapplication.interface import IEEAWebApplication
+
 
 try:
     from Products.eeawebapplication.browser.ajaxtabs import AjaxTabs
 except ImportError, err:
+    AjaxTabs = None
+    logger = logging.getLogger('Products.eeawebapplication.browser.main')
     logger.debug(err)
+
+logger = logging.getLogger('Products.eeawebapplication.browser.main')
+
 
 class StandardMacros(BrowserView, Macros):
     """ StandardMacros BrowserView with main_template.
@@ -207,6 +213,7 @@ class Main(BrowserView):
         context = aq_inner(self.context)
         template = self.template.__of__(context)
         menu = self.menu()
+        submenu = None
         for m in menu:
             folder = getattr(self.context, m['id'], None)
             if folder:

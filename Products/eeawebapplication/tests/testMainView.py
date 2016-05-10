@@ -1,8 +1,10 @@
 """ Tests the Main view
 """
-from Products.eeawebapplication.tests.base import WebAppTestCase
-from Products.eeawebapplication.browser.main import Main, PrepareBody
 from unittest import TestSuite, makeSuite
+
+from Products.eeawebapplication.browser.main import Main, PrepareBody
+from Products.eeawebapplication.tests.base import WebAppTestCase
+
 
 class TestMainView(WebAppTestCase):
     """ Main Test class
