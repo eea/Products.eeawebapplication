@@ -1,6 +1,9 @@
 Changelog
 =========
 
+4.6.dev0 - (unreleased)
+-----------------------
+
 4.5 - (2016-05-19)
 ------------------
 * Bug fix: Fix pylint warnings
