@@ -5,10 +5,10 @@ from Acquisition import aq_base
 from Products.CMFPlone import utils
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.interfaces import INavigationPortlet
-from plone.app.layout.navigation.interfaces import INavtreeStrategy
-from plone.app.portlets.portlets import navigation
 from Products.eeawebapplication.interface import IEEAWebApplication
 from Products.CMFPlone.browser.navtree import DefaultNavtreeStrategy
+from plone.app.layout.navigation.interfaces import INavtreeStrategy
+from plone.app.portlets.portlets import navigation
 
 def getApplicationRoot(obj):
     """ Returns root of application for given object

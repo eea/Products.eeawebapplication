@@ -22,4 +22,3 @@ class Convert(BrowserView):
         currentInterfaces = zope.interface.directlyProvidedBy(self.context)
         newInterfaces = currentInterfaces - IEEAWebApplication
         zope.interface.directlyProvides(self.context, newInterfaces)
-
