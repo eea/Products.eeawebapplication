@@ -1,10 +1,8 @@
 ===================
 EEA web application
 ===================
-.. image:: http://ci.eionet.europa.eu/job/Products.eeawebapplication-www/badge/icon
-  :target: http://ci.eionet.europa.eu/job/Products.eeawebapplication-www/lastBuild
-.. image:: http://ci.eionet.europa.eu/job/Products.eeawebapplication-plone4/badge/icon
-  :target: http://ci.eionet.europa.eu/job/Products.eeawebapplication-plone4/lastBuild
+.. image:: http://ci.eionet.europa.eu/job/eea/job/Products.eeawebapplication/job/master/badge/icon
+  :target: http://ci.eionet.europa.eu/job/eea/job/Products.eeawebapplication/job/master/display/redirect
 
 This product provides templates for folders marked with ``IEEAWebApplication`` interface.
 
