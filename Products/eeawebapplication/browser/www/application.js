@@ -25,9 +25,9 @@ function resizeDiv()
 }
 
 
-window.onresize=resizeDiv
+window.onresize=resizeDiv;
 
 AttachEvent(window,'load', resizeDiv, false);
 
-   
+
 

@@ -1,7 +1,8 @@
+/* jslint:disable */
 /*
  Ajax Tabs v1.0
  Copyright 2006 HavocStudios.com
-	
+
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -9,7 +10,7 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
- 
+
  The above copyright notice and this permission notice shall be
  included in all copies or substantial portions of the Software.
 
@@ -35,8 +36,8 @@ var AjaxTabs = {
 };
 
 AjaxTabs.Tabs = Class.create();
-Object.extend(AjaxTabs.Tabs.prototype, {		
- 
+Object.extend(AjaxTabs.Tabs.prototype, {
+
   initialize : function(tabListId, tabPanelsId) {
      this.tabListId = tabListId;
      this.tabPanelsId = tabPanelsId;
@@ -47,7 +48,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 		{
 			var lastTabId = "";
 			var somethingHasFocus = false;
-			
+
 			var closeTab = true;
 			var closeJS = "if (window.tabClose"+tabId+") { closeTab = tabClose"+tabId+"(); }";
 			eval(closeJS);
@@ -87,7 +88,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 					}
 				}
 			}
-		
+
 			// If we closed the tab that had focus, focus on another tab.
 			for (i=0; i < tabList.childNodes.length; i++)
 			{
@@ -100,13 +101,13 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 					}
 				}
 			}
-			
+
 			if (!somethingHasFocus)
 			{
 				this.FocusTab(lastTabId);
 			}
 		},
-				
+
 
 	 CreateNewTab:	function(tabId, tabLabel, tabURL, tabIsCloseable, tabColor)
 		{
@@ -123,11 +124,11 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 			{
 				newLabel.innerHTML = "<div class=\"tabHandle\">" + tabLabel + "</div> <img src=\"spacer.gif\" border=\"0\" width=\"14\" height=\"14\" />";
 			}
-			
+
 			var oldTab = document.getElementById(tabId);
 			var newTab = oldTab
  			if (oldTab == null) {
-			    newTab = document.createElement('li'); 
+			    newTab = document.createElement('li');
 			    newTab.className = tabColor;
                        }
 
@@ -141,7 +142,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
                         newTab.onclick  = AjaxTabs.onClick.bindAsEventListener(newTab);
 //                        newTab.onclick = function () { AjaxTabs.onClick(); return false; }
 			newTab.setAttribute("tabIsCloseable", "0");
-			
+
 			if (tabIsCloseable)
 			{
 				newTab.setAttribute("tabIsCloseable", "1");
@@ -151,7 +152,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 			if (oldTab == null) {
  			     document.getElementById(this.tabListId).appendChild(newTab);
                         }
-			
+
 			// create the panel
 			var oldPanel = document.getElementById('panel_' + tabId);
 			var newPanel = oldPanel
@@ -162,7 +163,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 			newPanel.setAttribute("panelURL", tabURL);
 			newPanel.setAttribute("tabColor", tabColor);
 			newPanel.className = tabColor + "Panel";
-			
+
 			/* newPanel.style.display = "none"; */
                         if (oldPanel == null) {
 			document.getElementById(this.tabPanelsId).appendChild(newPanel); }
@@ -171,11 +172,11 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 
                          if ( oldTab != null && oldTab.className != 'selected') {
   			  this.RefreshTab(tabId); // load the page up
-			} else { 				
+			} else {
     		         eval("if (window.tabFocus"+tabId+") { tabFocus"+tabId+"(); }");
                        }
 		},
-		
+
 	 GetFocusedTabId: function()
 		{
 			var tabList = document.getElementById(this.tabListId);
@@ -195,7 +196,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 		{
 
 			var currentFocusedTabId = this.GetFocusedTabId();
-			
+
 			var tabList = document.getElementById(this.tabListId);
 			for (j=0; j < tabList.childNodes.length; j++)
 			{
@@ -210,7 +211,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 						tabList.childNodes[j].className = className + "selected";
                                                 panel = document.getElementById("panel_" + currentTabId)
 						panel.className = "selected";
-	                       
+
 					}
 					else
 					{
@@ -218,8 +219,8 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 
 						if(currentTabId != null) {
                                 	           panel =  document.getElementById("panel_" + currentTabId)
-						   if(panel != null) { 
-   						   document.getElementById("panel_" + currentTabId).className = "hidden" ; 
+						   if(panel != null) {
+   						   document.getElementById("panel_" + currentTabId).className = "hidden" ;
 						   }
 
                                            }
@@ -227,7 +228,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 					}
 				}
 			}
-			
+
 			if (tabId != currentFocusedTabId)
 			{
 				eval("if (window.tabBlur"+currentFocusedTabId+") { tabBlur"+currentFocusedTabId+"(); }");
@@ -235,11 +236,11 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 			}
 			resizeDiv();
 		},
-		
+
 	 RefreshTab: function(tabId)
 		{
 			/* document.getElementById("panel_" + tabId).innerHTML = "Hello, World.<br/>" + document.getElementById("panel_" + tabId).getAttribute("panelURL"); */
-			
+
 			var http = getHTTPObject();
 			var panel = document.getElementById('panel_' + tabId);
 			var page = panel.getAttribute('panelURL');
@@ -247,7 +248,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 			var now = new Date();
 			var openFuncExists = false;
 			var timeoutId;
-			
+
 			// hack to get IE to refresh all the time by making each url unique by adding a timestamp onto it. (ie tries to cache everything)
 /*			if (url.indexOf("?") > -1) // this url has get params somewhere
 			{
@@ -265,7 +266,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 			{
 				url = url + "?t=" + now.getTime();
 			}
-			// end IE hack				
+			// end IE hack
 */
 			http.open("GET", url, true);
 			http.onreadystatechange = function() {
@@ -291,10 +292,10 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 				}
 			}
 			document.getElementById('panel_' + tabId).innerHTML = "<div class='loadingBox'><b>Please wait. Loading...</b> <img src='indicator.gif' /></div>";
-			
+
 			http.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
 			http.send(null);
-			
+
 			timeoutId = window.setTimeout(
 				function() {
 					switch (http.readyState) {
@@ -313,7 +314,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 			);
 
    	 },
-		
+
 	 TabExists: function(tabId)
 		{
 			var exists = false;
@@ -336,7 +337,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 			}
 			return exists;
 		},
-		
+
 	 OpenTab: function(tabId, tabLabel, tabURL, tabIsCloseable, tabColor)
 		{
 			if (this.TabExists(tabId))
@@ -349,7 +350,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 			}
 	              return false;
 		},
-		
+
 	 SetTabURL: function(tabId, url)
 		{
 			document.getElementById('panel_' + tabId).setAttribute('panelURL', url);
