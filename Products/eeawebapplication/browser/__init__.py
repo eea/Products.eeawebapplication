@@ -1,6 +1,6 @@
 ################################################################################
 # Copyright (C) 2006  EEA - European Enviromental Agency
-# 			    Antonio De Marinis <antonio.de.marinis@eea.eu.int>
+# 			    Antonio De Marinis <Antonio.DeMarinis@eea.europa.eu>
 #                    Sasha Vincic <sasha.vincic@lovelysystems.com>
 #
 # This program is free software; you can redistribute it and/or
