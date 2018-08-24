@@ -1,8 +1,15 @@
 Changelog
 =========
 
-4.8.dev0 - (unreleased)
+4.9 - (2018-08-23)
 -----------------------
+* Change: updated URLs pointing to eea.europa.eu with https://
+  [alecghica refs #95849]
+* Change: updated URLs pointing to eea.eu.int
+  [alecghica refs #97535]
+
+4.8 - (2017-12-12)
+------------------
 * Change: Replace eeacms/zptlint with eeacms/plone-test:4 zptlint
   [avoinea refs #90415]
 
