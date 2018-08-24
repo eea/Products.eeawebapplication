@@ -1,6 +1,9 @@
 Changelog
 =========
 
+5.0-dev0 - (unreleased)
+---------------------
+
 4.9 - (2018-08-23)
 -----------------------
 * Change: updated URLs pointing to eea.europa.eu with https://
@@ -59,4 +62,3 @@ Changelog
 ------------------
 * Change: eggified product
   [ichimdav #2931]
-
