@@ -2,13 +2,13 @@ Changelog
 =========
 
 5.1-dev0 - (unreleased)
----------------------
+--------------------------
 * Change: removed scanforlinksinarea call from tabs.js as we have removed
   mark_special_links.js from the portal
   [ichim-david refs #115646]
 
 5.0 - (2019-01-28)
----------------------
+--------------------------
 * Jenkins: Add sonarqube step
   [avoinea refs #101552]
 
