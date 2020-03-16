@@ -278,7 +278,7 @@ Object.extend(AjaxTabs.Tabs.prototype, {
 
 						panel = document.getElementById('panel_' + tabId)
           					panel.innerHTML = htmlDoc;
-					        scanforlinksinarea(panel);
+					        // scanforlinksinarea(panel);
 						if (document.getElementById('script_' + tabId))
 						{
 
